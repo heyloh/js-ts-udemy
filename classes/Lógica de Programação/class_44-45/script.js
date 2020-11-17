@@ -4,10 +4,15 @@ function sum(x, y) {
   }
   return x + y;
 }
+
 try {
   console.log(sum(1,2));
   console.log(sum('1',2));
 } catch(err) {
+  // Executado quando há erros
   // console.log(err);
   console.log('Deu erro amigão...');
+} finally {
+  // Sempre será executado
+  console.log('Enfim, sempre sou executado...');
 }
