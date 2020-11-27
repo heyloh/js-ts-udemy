@@ -1,6 +1,6 @@
 module.exports = {
   async index(request, response) {
-    return response.json('Rota de listagem.');
+    return response.render('index');
   },
 
   async store(request, response) {
