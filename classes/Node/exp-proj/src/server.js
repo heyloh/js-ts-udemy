@@ -8,6 +8,10 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
+const helmet = require('helmet');
+const csrf = require('csurf');
+
+const { checkCsrfError, csrfMiddleware } = require('./middlewares/csrf');
 
 const sessionOptions = session({
   secret: 'Ax4#Wd1{Ee8^Zw2[Fs2^',
@@ -36,8 +40,15 @@ app.set('view engine', 'ejs'); // O que vamos usar para renderizar as Views
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
+
 app.use(sessionOptions);
 app.use(flash());
+app.use(helmet());
+app.use(csrf());
+
+app.use(checkCsrfError);
+app.use(csrfMiddleware);
+
 app.use(routes);
 
 app.on('Ready!', () => {
