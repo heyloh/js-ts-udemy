@@ -2,7 +2,10 @@ const HomeModel = require('../models/HomeModel');
 
 module.exports = {
   async index(request, response) {
-    return response.render('index');
+    return response.render('index', {
+      title: 'Página inicial',
+      description: 'Bem-vindo ao site, informe seu nome abaixo.',
+    });
     /* Coloque next(); caso haja outro middleware após esse controller */
   },
 
